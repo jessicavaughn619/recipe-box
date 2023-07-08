@@ -11,7 +11,7 @@ export default function RecipeBox({route, recipes}) {
     return (
         <ScrollView>
             <Text>
-            This is {route.params.name}'s Recipe Box!
+            {route.params.name}'s Recipe Box
             </Text>
             {allRecipes}
         </ScrollView>

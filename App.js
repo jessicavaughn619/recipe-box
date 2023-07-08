@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import Home from './components/Home';
 import RecipeBox from './components/RecipeBox';
-import allRecipes from './recipes.json'
+import recipes from './components/recipes'
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +20,7 @@ export default function App() {
           <Stack.Screen
               name="RecipeBox"
               component={RecipeBox}
-              recipes={allRecipes}
+              recipes={recipes}
           />
       </Stack.Navigator>
     </NavigationContainer>

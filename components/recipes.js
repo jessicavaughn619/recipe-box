@@ -1,5 +1,4 @@
-{
-    "allRecipes": [
+const recipes = [
         {
             "id": 1,
             "title": "Mac 'n Cheese",
@@ -17,4 +16,4 @@
             "time": "25 minutes"
         }
     ]
-}
+export default recipes;
