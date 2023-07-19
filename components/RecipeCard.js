@@ -1,26 +1,39 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
 
-export default function RecipeBox({recipe}) {
-    const { title, image, ingredients, steps, time } = recipe;
+export default function RecipeCard({ route }) {
+    const { title, image, ingredients, steps, cookTime, prepTime } = route.params.recipe;
     
-    let timeEmoji;
-    if (time <= 15) {
-        timeEmoji = '🍳';
-    } else if (time > 15 && time <= 30) {
-        timeEmoji = '🍳🍳';
-    } else if (time > 30 && time <= 45) {
-        timeEmoji = '🍳🍳🍳';
-    } else if (time > 45 && time <= 60) {
-        timeEmoji = '🍳🍳🍳🍳';
-    } else if (time > 60) {
-        timeEmoji = '🍳🍳🍳🍳🍳';
+    let cookTimeEmoji;
+    if (cookTime <= 15) {
+        cookTimeEmoji = '🍳';
+    } else if (cookTime > 15 && cookTime <= 30) {
+        cookTimeEmoji = '🍳🍳';
+    } else if (cookTime > 30 && cookTime <= 45) {
+        cookTimeEmoji = '🍳🍳🍳';
+    } else if (cookTime > 45 && cookTime <= 60) {
+        cookTimeEmoji = '🍳🍳🍳🍳';
+    } else if (cookTime > 60) {
+        cookTimeEmoji = '🍳🍳🍳🍳🍳';
+    }
+
+    let prepTimeEmoji;
+    if (prepTime <= 15) {
+        prepTimeEmoji = '🔪';
+    } else if (prepTime > 15 && prepTime <= 30) {
+        prepTimeEmoji = '🔪🔪';
+    } else if (prepTime > 30 && prepTime <= 45) {
+        prepTimeEmoji = '🔪🔪🔪';
+    } else if (prepTime > 45 && prepTime <= 60) {
+        prepTimeEmoji = '🔪🔪🔪🔪';
+    } else if (prepTime > 60) {
+        prepTimeEmoji = '🔪🔪🔪🔪🔪';
     }
 
     return (
-        <View
+        <ScrollView
             style={styles.cardContainer}>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subheading}>Time: {timeEmoji}</Text>
+            <Text style={styles.subheading}>Prep: {prepTimeEmoji} Cook: {cookTimeEmoji}</Text>
             <Image source={image} style={styles.image}/>
             <Text style={styles.subheading}>Ingredients:</Text>
             <View style={styles.list}>
@@ -38,7 +51,7 @@ export default function RecipeBox({recipe}) {
                 </Text>
             ))} 
             </View>
-        </View>
+        </ScrollView>
     )
 }
 

@@ -1,13 +1,15 @@
+import 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
 import Home from './components/Home';
-import RecipeBox from './components/RecipeBox';
 import Account from './components/Account';
 import allRecipes from './components/recipes';
 import { Context } from './context';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import RecipeBox from './components/RecipeBox';
+import MyDrawer from './components/MyDrawer';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +29,7 @@ export default function App() {
           let iconName;
           if (route.name === 'Home') {
             iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
-          } else if (route.name === 'Recipe Box') {
+          } else if (route.name === 'Recipes') {
             iconName = focused ? 'ios-book' : 'ios-book-outline';
           } else if (route.name === 'Account') {
             iconName = focused ? 'ios-person' : 'ios-person-outline';
@@ -45,9 +47,9 @@ export default function App() {
               options = {{ headerShown: false }}
           />
           <Tab.Screen
-              name="Recipe Box"
-              component={RecipeBox}
-              options={{ title: 'Recipe Box' }}  
+              name="Recipes"
+              component={MyDrawer}
+              options={{ title: 'Recipes', headerShown: false }}  
           />
           <Tab.Screen
               name="Account"
