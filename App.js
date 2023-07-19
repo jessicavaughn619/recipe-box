@@ -34,18 +34,20 @@ export default function App() {
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'green',
+        tabBarActiveTintColor: '#0d7446',
         tabBarInactiveTinyColor: 'gray',
-        headerShown: false,
+        headerStyle: {height: 80}
       })}
       >
           <Tab.Screen
               name="Home"
               component={Home}
+              options = {{ headerShown: false }}
           />
           <Tab.Screen
               name="Recipe Box"
               component={RecipeBox}
+              options={{ title: 'Recipe Box' }}  
           />
           <Tab.Screen
               name="Account"

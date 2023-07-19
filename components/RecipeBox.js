@@ -1,4 +1,4 @@
-import { Text, View } from "react-native"
+import { Text, ScrollView, StyleSheet } from "react-native"
 import { useContext } from "react"
 import RecipeCard from "./RecipeCard"
 import { Context } from "../context"
@@ -14,14 +14,18 @@ export default function RecipeBox() {
     return (
         <Context.Consumer>
         { recipes => 
-        <View
-            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>
-            Recipe Box
-            </Text>
+        <ScrollView style={styles.cardContainer}>
             {allRecipes}
-        </View>
+        </ScrollView>
         }
         </Context.Consumer>
     )
 }
+
+const styles = StyleSheet.create({
+    cardContainer: {
+        backgroundColor: 'rgba(13, 116, 70, .6)',
+        padding: 16,
+
+    },
+})
