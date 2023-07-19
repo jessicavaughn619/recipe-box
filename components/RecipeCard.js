@@ -1,15 +1,15 @@
-import {ScrollView, Text, Image} from 'react-native'
+import {View, Text, Image} from 'react-native'
 
 export default function RecipeBox({recipe}) {
-    const {title, ingredients, image, steps, time} = recipe;
+    const { title, image, ingredients, steps, time } = recipe;
+
     return (
-        <ScrollView>
+        <View>
             <Text>{title}</Text>
-            <Image 
-            src={image}/>
+            <Image src={image}/>
             <Text>{ingredients}</Text>
             <Text>{steps}</Text>
             <Text>{time}</Text>
-        </ScrollView>
+        </View>
     )
 }

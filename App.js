@@ -1,29 +1,59 @@
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import { useState, useEffect } from 'react';
 import Home from './components/Home';
 import RecipeBox from './components/RecipeBox';
-import recipes from './components/recipes'
+import Account from './components/Account';
+import allRecipes from './components/recipes';
+import { Context } from './context';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+  setRecipes(allRecipes);
+}, [])
 
   return (
+    <Context.Provider value={recipes}>
     <NavigationContainer>
-      <Stack.Navigator>
-          <Stack.Screen
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+          if (route.name === 'Home') {
+            iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
+          } else if (route.name === 'Recipe Box') {
+            iconName = focused ? 'ios-book' : 'ios-book-outline';
+          } else if (route.name === 'Account') {
+            iconName = focused ? 'ios-person' : 'ios-person-outline';
+          }
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: 'green',
+        tabBarInactiveTinyColor: 'gray',
+        headerShown: false,
+      })}
+      >
+          <Tab.Screen
               name="Home"
               component={Home}
-              options={{title: 'Home'}}
           />
-          <Stack.Screen
-              name="RecipeBox"
+          <Tab.Screen
+              name="Recipe Box"
               component={RecipeBox}
-              recipes={recipes}
           />
-      </Stack.Navigator>
+          <Tab.Screen
+              name="Account"
+              component={Account}
+          />
+      </Tab.Navigator>
     </NavigationContainer>
+    </Context.Provider>
   )
 }
 

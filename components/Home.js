@@ -1,15 +1,13 @@
-import { Button } from "react-native"
-import logo from '../images/logo.png'
+import { View, ImageBackground } from "react-native"
 
 export default function Home({navigation}) {
     return (
-        <View>
-        <Image src={logo}/>
-        <Button
-            title="View Recipe Box"
-            onPress={() => 
-            navigation.navigate('RecipeBox', {name: 'Jessica'})}
-        />
+        <View 
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ImageBackground 
+            source={require('../images/logo.png')}
+            style={{height: '65%', width: '100%'}}>
+        </ImageBackground>
         </View>
     )
 }
