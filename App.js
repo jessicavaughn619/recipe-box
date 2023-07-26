@@ -1,5 +1,4 @@
 import 'react-native-gesture-handler';
-import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
 import Home from './components/Home';
@@ -59,12 +58,3 @@ export default function App() {
     </Context.Provider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

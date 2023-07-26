@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   textContainer: {
     flex: 2,
     width: '100%',
-    backgroundColor: 'rgba(13, 116, 70, .6)',
+    backgroundColor: 'rgba(13, 116, 70, .4)',
     paddingHorizontal: 25,
     paddingVertical: 10,
     alignItems: 'center',
@@ -86,9 +86,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     paddingBottom: 30,
+    color: '#fff',
+    fontFamily: 'Arial',
   },
   text: {
     fontSize: 24,
     textAlign: 'center',
+    color: '#fff',
+    fontFamily: 'Arial',
   }
 });

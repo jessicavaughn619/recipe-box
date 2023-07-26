@@ -1,12 +1,9 @@
 import { ScrollView, View, Text, Image, StyleSheet, Button } from 'react-native';
-import { useState, useContext } from 'react';
 import { Context } from '../context';
+import FavoriteHeart from './FavoriteHeart';
 
 export default function RecipeCard({ route }) {
     const { id, title, image, ingredients, steps, cookTime, prepTime, favorite } = route.params.recipe;
-    const [isFavorite, setIsFavorite] = useState(favorite)
-
-    const recipes = useContext(Context);
     
     const cookTimeEmojiCount = Math.ceil(cookTime / 15);
     const maxCookTimeEmojiCount = 5;
@@ -20,42 +17,20 @@ export default function RecipeCard({ route }) {
         return arr.length > 1
     }
 
-    let faveIcon;
-    if (isFavorite) {
-        faveIcon = '♥️'
-    } 
-    else faveIcon = '🤍'
-
-    function handleEditFavorite(id) {
-        const updatedRecipes = recipes.map(recipe => {
-            if (recipe.id === id) {
-                return {...recipe, favorite: !favorite}
-            }
-            return recipe;
-        })
-        console.log(updatedRecipes)
-    }
-
-    function handlePress() {
-        setIsFavorite(isFavorite => !isFavorite)
-        handleEditFavorite(id)
-    }
-
     return (
         <Context.Consumer>
         {recipes => <ScrollView
             style={styles.cardContainer}>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.subheading}>Prep: {prepTimeEmoji} Cook: {cookTimeEmoji}</Text>
-            <Button 
-                title={faveIcon}
-                onPress={handlePress}
-                ></Button>
+            <View style={{flexDirection: 'row', alignSelf: 'center', alignItems: 'center'}}>
             <Image source={image} style={styles.image}/>
+            <FavoriteHeart favorite={favorite}/>
+            </View>
             <Text style={styles.subheading}>Ingredients:</Text>
             {Object.keys(ingredients).map((section, index) => (
             <View key={index}>
-                {checkLength(Object.keys(ingredients)) ? <Text>{section.toUpperCase()}</Text> : null}
+                {checkLength(Object.keys(ingredients)) ? <Text style={styles.subsection}>{section.toUpperCase()}</Text> : null}
                 {ingredients[section].map((ingredient, ingredientIndex) => (
                 <Text key={ingredientIndex} style={styles.item}>
                     {`\u2022 ${ingredient}`}
@@ -66,7 +41,7 @@ export default function RecipeCard({ route }) {
             <Text style={styles.subheading}>Steps:</Text>
             {Object.keys(steps).map((section, index) => (
             <View key={index}>
-                {checkLength(Object.keys(steps)) ? <Text>{section.toUpperCase()}</Text> : null}
+                {checkLength(Object.keys(steps)) ? <Text style={styles.subsection}>{section.toUpperCase()}</Text> : null}
                 {steps[section].map((step, stepIndex) => (
                 <Text key={stepIndex} style={styles.item}>
                 {`${stepIndex + 1}. ${step}`}
@@ -86,6 +61,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 16,
         marginBottom: 16,
+        marginTop: 16,
         elevation: 2,
         shadowColor: '#000',
         shadowOffset: {
@@ -103,7 +79,14 @@ const styles = StyleSheet.create({
     subheading: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 8,
+        marginBottom: 4,
+        marginTop: 4,
+    },
+    subsection: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 4,
+        marginTop: 4,
     },
     list: {
         marginLeft: 8,
@@ -113,8 +96,9 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     image: {
-        height: 150, 
-        width: 150,
+        height: 200, 
+        width: 200,
         marginBottom: 8,
+        alignSelf: 'center',
     },
 });
