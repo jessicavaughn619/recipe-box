@@ -8,7 +8,6 @@ import allRecipes from './components/recipes';
 import { Context } from './context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import RecipeBox from './components/RecipeBox';
 import MyDrawer from './components/MyDrawer';
 
 const Tab = createBottomTabNavigator();

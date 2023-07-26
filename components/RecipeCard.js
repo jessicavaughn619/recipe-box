@@ -1,57 +1,82 @@
-import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, Image, StyleSheet, Button } from 'react-native';
+import { useState, useContext } from 'react';
+import { Context } from '../context';
 
 export default function RecipeCard({ route }) {
-    const { title, image, ingredients, steps, cookTime, prepTime } = route.params.recipe;
+    const { id, title, image, ingredients, steps, cookTime, prepTime, favorite } = route.params.recipe;
+    const [isFavorite, setIsFavorite] = useState(favorite)
+
+    const recipes = useContext(Context);
     
-    let cookTimeEmoji;
-    if (cookTime <= 15) {
-        cookTimeEmoji = '🍳';
-    } else if (cookTime > 15 && cookTime <= 30) {
-        cookTimeEmoji = '🍳🍳';
-    } else if (cookTime > 30 && cookTime <= 45) {
-        cookTimeEmoji = '🍳🍳🍳';
-    } else if (cookTime > 45 && cookTime <= 60) {
-        cookTimeEmoji = '🍳🍳🍳🍳';
-    } else if (cookTime > 60) {
-        cookTimeEmoji = '🍳🍳🍳🍳🍳';
+    const cookTimeEmojiCount = Math.ceil(cookTime / 15);
+    const maxCookTimeEmojiCount = 5;
+    const cookTimeEmoji = '🍳'.repeat(Math.min(cookTimeEmojiCount, maxCookTimeEmojiCount));
+
+    const prepTimeEmojiCount = Math.ceil(prepTime / 15);
+    const maxPrepTimeEmojiCount = 5;
+    const prepTimeEmoji = '🔪'.repeat(Math.min(prepTimeEmojiCount, maxPrepTimeEmojiCount));
+
+    function checkLength(arr) {
+        return arr.length > 1
     }
 
-    let prepTimeEmoji;
-    if (prepTime <= 15) {
-        prepTimeEmoji = '🔪';
-    } else if (prepTime > 15 && prepTime <= 30) {
-        prepTimeEmoji = '🔪🔪';
-    } else if (prepTime > 30 && prepTime <= 45) {
-        prepTimeEmoji = '🔪🔪🔪';
-    } else if (prepTime > 45 && prepTime <= 60) {
-        prepTimeEmoji = '🔪🔪🔪🔪';
-    } else if (prepTime > 60) {
-        prepTimeEmoji = '🔪🔪🔪🔪🔪';
+    let faveIcon;
+    if (isFavorite) {
+        faveIcon = '♥️'
+    } 
+    else faveIcon = '🤍'
+
+    function handleEditFavorite(id) {
+        const updatedRecipes = recipes.map(recipe => {
+            if (recipe.id === id) {
+                return {...recipe, favorite: !favorite}
+            }
+            return recipe;
+        })
+        console.log(updatedRecipes)
+    }
+
+    function handlePress() {
+        setIsFavorite(isFavorite => !isFavorite)
+        handleEditFavorite(id)
     }
 
     return (
-        <ScrollView
+        <Context.Consumer>
+        {recipes => <ScrollView
             style={styles.cardContainer}>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.subheading}>Prep: {prepTimeEmoji} Cook: {cookTimeEmoji}</Text>
+            <Button 
+                title={faveIcon}
+                onPress={handlePress}
+                ></Button>
             <Image source={image} style={styles.image}/>
             <Text style={styles.subheading}>Ingredients:</Text>
-            <View style={styles.list}>
-                {ingredients.map((ingredient, index) => (
-                    <Text key={index} style={styles.item}>
-                        {`\u2022 ${ingredient}`}
-                    </Text>
+            {Object.keys(ingredients).map((section, index) => (
+            <View key={index}>
+                {checkLength(Object.keys(ingredients)) ? <Text>{section.toUpperCase()}</Text> : null}
+                {ingredients[section].map((ingredient, ingredientIndex) => (
+                <Text key={ingredientIndex} style={styles.item}>
+                    {`\u2022 ${ingredient}`}
+                </Text>
                 ))}
             </View>
+            ))}
             <Text style={styles.subheading}>Steps:</Text>
-            <View style={styles.list}>
-            {steps.map((step, index) => (
-                <Text key={index} style={styles.item}>
-                    {`${index + 1}. ${step}`}
+            {Object.keys(steps).map((section, index) => (
+            <View key={index}>
+                {checkLength(Object.keys(steps)) ? <Text>{section.toUpperCase()}</Text> : null}
+                {steps[section].map((step, stepIndex) => (
+                <Text key={stepIndex} style={styles.item}>
+                {`${stepIndex + 1}. ${step}`}
                 </Text>
-            ))} 
+                ))}
             </View>
+            ))}
         </ScrollView>
+        }
+        </Context.Consumer>
     )
 }
 

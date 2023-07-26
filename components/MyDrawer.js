@@ -9,7 +9,9 @@ const Drawer = createDrawerNavigator();
 export default function MyDrawer() {
     const recipes = useContext(Context);
 
-    const allRecipes = recipes.map(recipe => (
+    const sortedRecipes = recipes.sort((a, b) => a.title.localeCompare(b.title));
+
+    const allRecipes = sortedRecipes.map(recipe => (
         <Drawer.Screen key={recipe.id} name={recipe.title} component={RecipeCard} initialParams={{recipe: recipe}}/>
     ))
 
@@ -17,7 +19,7 @@ export default function MyDrawer() {
         <Context.Consumer>
         {recipes => 
         <Drawer.Navigator>
-        <Drawer.Screen name="Favorites" component={RecipeBox} />
+        <Drawer.Screen name="Favorites" component={RecipeBox}/>
         {allRecipes}
         </Drawer.Navigator>
         }
