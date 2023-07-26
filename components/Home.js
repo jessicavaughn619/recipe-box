@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, Animated } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import the icon from the library
+import { View, Text, Image, StyleSheet, Animated } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function Home() {
   const contentBlocks = [
@@ -10,7 +10,6 @@ export default function Home() {
     { type: 'text', text: 'Save your favorite recipes for easy viewing! 💚' },
     { type: 'text', text: 'Click on the Recipes tab below to get cookin! 🧑‍🍳' },
     { type: 'icon', name: 'arrow-circle-down', size: 42, color: 'darkgreen' },
-    // Add more text or icon blocks as needed
   ];
 
   const staggerDelay = 500;
@@ -41,7 +40,7 @@ export default function Home() {
         <Image source={require('../images/logo.png')} style={styles.image} resizeMode="cover" />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.textHeading}>Welcome to Recipe Book!</Text>
+        <Text style={styles.textHeading}>Welcome to Recipe Box!</Text>
         {contentBlocks.map((block, index) => (
           <Animated.View key={index} style={{ opacity: animatedValues[index], marginTop: index > 0 ? 15 : 0 }}>
             {block.type === 'text' && (
