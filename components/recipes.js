@@ -10,7 +10,7 @@ const allRecipes = [
         {
             id: 1,
             title: "Mac 'n Cheese",
-            image: MAC_N_CHEESE,
+            image: '../images/recipes/mac-and-cheese.jpeg',
             ingredients: {
                 main: ['4 TBSP butter', '1/4 cup flour', '2 cups milk', '1/3 chunk Velveeta cheese', '1 box elbow noodles', 'paprika', 'pepper', 'salt']
             },

@@ -1,10 +1,10 @@
-import { useContext } from 'react'
-import { ScrollView, View, Text, StyleSheet, Image } from "react-native";
+import { useContext } from "react";
+import { ScrollView, View, Text, Image, StyleSheet, Button } from "react-native";
 import { Context } from "../context";
-import FavoriteHeart from './FavoriteHeart';
 
-export default function RecipeBox() {
+export default function RecipeBox({navigation}) {
     const recipes = useContext(Context)
+
     const favoriteRecipes = recipes.filter(recipe => (recipe.favorite === true))
 
     return (
@@ -15,9 +15,9 @@ export default function RecipeBox() {
             <View key={recipe.id} style={styles.cardContainer}>
             <View style={{flexDirection: 'row'}}>
             <Text style={styles.title}>{recipe.title}</Text>
-            <FavoriteHeart favorite={recipe.favorite}/>
             </View>
             <Image source={recipe.image} style={styles.image}/>
+            <Button title="See more" onPress={() => navigation.navigate(recipe.title)}></Button>
             </View>
         ))}
         </ScrollView>

@@ -13,10 +13,24 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true)
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('htt://73.243.193.209:3000/recipes')
+      const jsonData = await response.json()
+      setRecipes(jsonData)
+      setLoading(false)
+    } catch (error) {
+      console.error('Error fetching data', error)
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-  setRecipes(allRecipes);
+  fetchData;
 }, [])
+
 
   return (
     <Context.Provider value={recipes}>
