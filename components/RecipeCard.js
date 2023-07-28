@@ -1,6 +1,7 @@
-import { ScrollView, View, Text, Image, StyleSheet, Button } from 'react-native';
+import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
 import { Context } from '../context';
 import FavoriteHeart from './FavoriteHeart';
+import images from "./recipe-images";
 
 export default function RecipeCard({ route }) {
     const { id, title, image, ingredients, steps, cookTime, prepTime, favorite } = route.params.recipe;
@@ -24,7 +25,7 @@ export default function RecipeCard({ route }) {
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.subheading}>Prep: {prepTimeEmoji} Cook: {cookTimeEmoji}</Text>
             <View style={{flexDirection: 'row', alignSelf: 'center', alignItems: 'center'}}>
-            <Image source={image} style={styles.image}/>
+            <Image source={images[image.split('/').pop()]} style={styles.image} />
             <FavoriteHeart favorite={favorite}/>
             </View>
             <Text style={styles.subheading}>Ingredients:</Text>

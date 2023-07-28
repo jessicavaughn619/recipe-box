@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { ScrollView, View, Text, Image, StyleSheet, Button } from "react-native";
 import { Context } from "../context";
+import images from "./recipe-images";
 
 export default function RecipeBox({navigation}) {
     const recipes = useContext(Context)
 
     const favoriteRecipes = recipes.filter(recipe => (recipe.favorite === true))
+
 
     return (
         <Context.Consumer>
@@ -16,7 +18,7 @@ export default function RecipeBox({navigation}) {
             <View style={{flexDirection: 'row'}}>
             <Text style={styles.title}>{recipe.title}</Text>
             </View>
-            <Image source={recipe.image} style={styles.image}/>
+            <Image source={images[recipe.image.split('/').pop()]} style={styles.image} />
             <Button title="See more" onPress={() => navigation.navigate(recipe.title)}></Button>
             </View>
         ))}

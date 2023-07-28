@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
 import Home from './components/Home';
 import Account from './components/Account';
-import allRecipes from './components/recipes';
+import Loading from './components/Loading';
 import { Context } from './context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -17,7 +17,7 @@ export default function App() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('htt://73.243.193.209:3000/recipes')
+      const response = await fetch('https://cool-nights-push.loca.lt/recipes')
       const jsonData = await response.json()
       setRecipes(jsonData)
       setLoading(false)
@@ -28,7 +28,7 @@ export default function App() {
   }
 
   useEffect(() => {
-  fetchData;
+  fetchData();
 }, [])
 
 
@@ -55,7 +55,8 @@ export default function App() {
       >
           <Tab.Screen
               name="Home"
-              component={Home}
+              component={loading ? Loading : Home}
+              initialParams={{loading: loading}}
               options = {{ headerShown: false }}
           />
           <Tab.Screen

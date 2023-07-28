@@ -3,7 +3,7 @@
         {
             "id": 1,
             "title": "Mac 'n Cheese",
-            "image": "./images/recipes/mac-and-cheese.jpeg",
+            "image": "../images/recipes/mac-and-cheese.jpeg",
             "ingredients": {
               "main": [
                 "4 TBSP butter",
@@ -38,7 +38,7 @@
           {
             "id": 2,
             "title": "Peach Dutch Baby",
-            "image": "./images/recipes/peach-dutch-baby.jpeg",
+            "image": "../images/recipes/peach-dutch-baby.jpeg",
             "ingredients": {
               "main": [
                 "4 TBSP butter",
@@ -69,7 +69,7 @@
           {
             "id": 3,
             "title": "Apple Dutch Baby",
-            "image": "./images/recipes/apple-dutch-baby-pancake.jpeg",
+            "image": "../images/recipes/apple-dutch-baby-pancake.jpeg",
             "ingredients": {
               "main": [
                 "4 TBSP butter",
@@ -101,7 +101,7 @@
           {
             "id": 4,
             "title": "Cast Iron Skillet Pizza",
-            "image": "./images/recipes/cast-iron-skillet-pizza.jpeg",
+            "image": "../images/recipes/cast-iron-skillet-pizza.jpeg",
             "ingredients": {
               "main": [
                 "1 1/2 cups flour plus additional 1 1/2 TSP",
@@ -137,7 +137,7 @@
           {
             "id": 5,
             "title": "Carrot Cake",
-            "image": "./images/recipes/carrot-cake.jpeg",
+            "image": "../images/recipes/carrot-cake.jpeg",
             "ingredients": {
               "frosting": [
                 "8 oz cream cheese",
@@ -182,7 +182,7 @@
           {
             "id": 6,
             "title": "Thanksgiving Stuffing",
-            "image": "./images/recipes/stuffing.jpeg",
+            "image": "../images/recipes/stuffing.jpeg",
             "ingredients": {
               "main": [
                 "1 white onion",
@@ -218,7 +218,7 @@
           {
             "id": 7,
             "title": "Olive Oil Cake",
-            "image": "./images/recipes/olive-oil-cake.jpeg",
+            "image": "../images/recipes/olive-oil-cake.jpeg",
             "ingredients": {
               "main": [
                 "1 cup extra virgin olive oil",
